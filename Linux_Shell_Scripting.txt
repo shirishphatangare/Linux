@@ -1,0 +1,161 @@
+*************Linux Shell Scripting**********************
+
+Reference1 - https://www.shellscript.sh/
+Reference2 - https://www.tutorialspoint.com/unix/shell_scripting.htm
+ 
+
+--------------------------------------------------------
+Types of shell in Linux --
+
+A Shell provides you with an interface to the Unix/Linux system. It gathers input from you and executes programs based on that input. When a program finishes executing, it displays that program's output.
+
+In Unix/Linux, there are two major types of shells −
+
+Bourne shell − If you are using a Bourne-type shell, the $ character is the default prompt.
+C shell − If you are using a C-type shell, the % character is the default prompt.
+
+The Bourne Shell has the following subcategories −
+
+Bourne shell (sh)
+Korn shell (ksh)
+Bourne Again shell (bash)
+POSIX shell (sh)
+
+The different C-type shells follow −
+
+C shell (csh)
+TENEX/TOPS C shell (tcsh)
+
+--------------------------------------------------------
+Shell Scripts - The basic concept of a shell script is a list of commands, which are listed in the order of execution.
+Shell script should have executable permissions.
+Shell script has to be called from an absolute path like - /home/userdir/script.sh
+If called from current directory then it has to be called like - ./script.sh
+
+
+The shebang construct - 
+
+Before you add anything else to your script, you need to alert the system that a shell script is being started. This is done using the shebang construct. For example −
+
+#!/bin/sh
+This tells the system that the commands that follow are to be executed by the Bourne shell (and path of the Bourne shell). It's called a shebang because the # symbol is called a hash, and the ! symbol is called a bang.
+
+Script always starts with the two character ‘#!’ which is called as she-bang. This is to indicate that the file is a script, and should be executed using the interpreter (/bin/bash) specified by the rest of the first line in the file.
+
+To create a script containing these commands, you put the shebang line first and then add the commands −
+
+#!/bin/bash
+pwd
+ls
+
+
+It is not mandatory to give she-bang as a first line. Without she-bang, we need to execute script as shown below. In this case, script is not an executable.
+
+[ec2-user@ip-172-31-36-254 scripts]$ cat script1.sh
+pwd
+ls
+
+See permissions below, script is not executable.
+
+[ec2-user@ip-172-31-36-254 scripts]$ ls -ltr
+total 4
+-rw-rw-r--. 1 ec2-user ec2-user 7 Sep 22 21:20 script1.sh
+
+[ec2-user@ip-172-31-36-254 scripts]$ bash script1.sh
+/home/ec2-user/sample/scripts
+script1.sh
+
+
+You can put your comments in your script as follows −
+
+#!/bin/bash
+
+# Author : Zara Ali
+# Copyright (c) Tutorialspoint.com
+# Script follows here:
+pwd
+ls
+
+Basically shell is an application in Linux under path /bin/bash or /bin/sh
+
+[ec2-user@ip-172-31-36-254 yum.repos.d]$ ls -ltr /bin/bash
+-rwxr-xr-x. 1 root root 1596592 Aug 30  2019 /bin/bash
+
+[ec2-user@ip-172-31-36-254 yum.repos.d]$ ls -ltr /bin/sh
+lrwxrwxrwx. 1 root root 4 Aug 30  2019 /bin/sh -> bash
+
+
+--------------------------------------------------------
+Shell Script - Example 1
+
+The shell is, after all, a real programming language, complete with variables, control structures, and so forth. No matter how complicated a script gets, it is still just a list of commands executed sequentially.
+
+The following script uses the read command which takes the input from the keyboard and assigns it as the value of the variable PERSON and finally prints it on STDOUT.
+
+#!/bin/bash
+
+# Author : Zara Ali
+# Copyright (c) Tutorialspoint.com
+# Script follows here:
+
+echo "What is your name?"
+read PERSON
+echo "Hello, $PERSON"
+
+
+Here is a sample run of the script −
+
+$./test.sh
+What is your name?
+Zara Ali
+Hello, Zara Ali
+$
+
+--------------------------------------------------------
+Shell Script - Example 2
+
+#!/bin/bash
+
+# Define small tasks
+# echo - for blank lines
+
+whoami
+echo
+pwd
+echo
+hostname
+echo
+ls -ltr
+echo
+--------------------------------------------------------
+Shell Script - Example 3
+
+#!/bin/bash
+
+# Delete all files under mentioned directories which were modified before -180 days from now. i.e. modified before 3 months from now.
+
+find /npe/apps/vuln/load/load_files/ -mtime +180 -exec rm -f {} \;
+find /npe/apps/vuln/tmp/ -mtime +180 -exec rm -f {} \;
+find /npe/apps/vuln/out/ -mtime +180 -exec rm -f {} \;
+find /npe/apps/vuln/logs/ -mtime +180 -exec rm -f {} \;
+
+--------------------------------------------------------
+Discard the output of a script
+
+Sometimes you will need to execute a command, but you don't want the output displayed on the screen. In such cases, you can discard the output by redirecting it to the file /dev/null −
+
+$ command.sh > /dev/null
+Here command.sh is the name of the script/command you want to execute. The file /dev/null is a special file that automatically discards all its input.
+
+To discard both output of a command and its error output, use standard redirection to redirect STDERR to STDOUT −
+
+$ command.sh > /dev/null 2>&1
+Here 2 represents STDERR and 1 represents STDOUT.
+
+$ command.sh > /var/log/log_file.log 2>&1
+Above command writes STDOUT of a script 'command.sh' to a log file 'log_file.log'. 
+Standard error STDERR (2) is also directed to STDOUT (1) (STDOUT is already directed to a log file 'log_file.log')
+ 
+
+You can display a message on to STDERR by redirecting STDOUT into STDERR as follows −
+$ echo message 1>&2
