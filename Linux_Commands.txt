@@ -5,6 +5,24 @@ https://explainshell.com/
 Important Files and Directories - http://www.dba-oracle.com/linux/important_files_directories.htm
 
 -------------------------------------------------------------------------
+Earlier companies began develping their own flavor of Unix OS --
+
+1) IBM - AIX
+2) SUN - Solaris
+3) HP - UX
+
+Various Linux distributions available nowadays --
+
+1) Red-Hat Linux
+2) Fedora
+3) Debian
+4) Ubuntu
+5) Cent-OS
+6) Linux Mint
+7) OpenSUSE / SUSE Linux Enterprise
+
+
+-------------------------------------------------------------------------
 Case sensitivity in Linux
 
 When interacting with the Unix/Linux operating system, one of the first things you need to know is that, unlike other computer systems you may be accustomed to, everything in Unix is case-sensitive. Be careful when you're typing in commands - whether a character is upper or lower case does make a difference.
@@ -455,6 +473,7 @@ emacs - Full screen editor
 pico - Beginner's editor
 vim - Improved vi
 gedit - Text Editor (gedit) is the default GUI text editor in the Ubuntu operating system
+nano
 
 
 Basic vi commands -- 
@@ -1477,6 +1496,7 @@ chmod commands - Symbolic representation of file permissions
 
 chmod commands - Octal representation of file permissions  
 
+Nothing - 0 
 r - 4
 w - 2
 x - 1

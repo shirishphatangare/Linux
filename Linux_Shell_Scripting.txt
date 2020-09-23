@@ -37,8 +37,8 @@ The shebang construct -
 
 Before you add anything else to your script, you need to alert the system that a shell script is being started. This is done using the shebang construct. For example −
 
-#!/bin/sh
-This tells the system that the commands that follow are to be executed by the Bourne shell (and path of the Bourne shell). It's called a shebang because the # symbol is called a hash, and the ! symbol is called a bang.
+#!/bin/bash
+This tells the system that the commands that follow are to be executed by the Bourne shell (and path of the Bourne shell interpreter). It's called a shebang because the # symbol is called a hash, and the ! symbol is called a bang.
 
 Script always starts with the two character ‘#!’ which is called as she-bang. This is to indicate that the file is a script, and should be executed using the interpreter (/bin/bash) specified by the rest of the first line in the file.
 
@@ -159,3 +159,92 @@ Standard error STDERR (2) is also directed to STDOUT (1) (STDOUT is already dire
 
 You can display a message on to STDERR by redirecting STDOUT into STDERR as follows −
 $ echo message 1>&2
+
+--------------------------------------------------------
+Using variables --
+
+Failure - Spaces cause problems when defining a variable. No spaces between key and value 
+
+[ec2-user@ip-172-31-36-254 scripts]$ cat script1.sh
+pwd
+ls
+NAME = "Shirish Phatanagare"
+echo "My name is $NAME"
+
+
+[ec2-user@ip-172-31-36-254 scripts]$ ./script1.sh
+/home/ec2-user/sample/scripts
+script1.sh
+./script1.sh: line 3: NAME: command not found
+My name is
+
+
+Success - Removed spaces between NAME variable and value 
+
+[ec2-user@ip-172-31-36-254 scripts]$ cat script1.sh
+pwd
+ls
+NAME="Shirish Phatanagare"
+echo "My name is $NAME"
+
+[ec2-user@ip-172-31-36-254 scripts]$ ./script1.sh
+/home/ec2-user/sample/scripts
+script1.sh
+My name is Shirish Phatanagare
+
+'readonly' keyword can be used to mark a variable as Read-only.
+readonly <variable-name>
+
+'unset' keyword can be used to un-set value of that variable
+unset <variable-name>
+
+Special variables --
+
+	$0 - The filename of the current script.
+
+	$n - These variables correspond to the arguments with which a script was invoked. Here n is a positive decimal number corresponding to the position of an argument (the first argument is $1, the second argument is $2, and so on).
+
+	$# - The number of arguments supplied to a script.
+
+	$* - All the arguments are double quoted. If a script receives two arguments, $* is equivalent to "$1 $2".
+
+	$@ - All the arguments are individually double quoted. If a script receives two arguments, $@ is equivalent to "$1","$2".
+
+	$? - The exit status of the last command executed. 0 - Success , 1 - Failure
+
+	$$ - The process number of the current shell. For shell scripts, this is the process ID under which they are executing.
+
+	$! - The process number of the last background command.
+
+# In Perl 0 is equivalent of boolean false and non-zero value is equivalent of boolean true
+# In Perl usually 0 or undef mean failure, and some other true value means success.
+# In the Unix/Linux shell world, 0 means success and other numbers mean failure.
+
+--------------------------------------------------------
+Basic Operators --
+
+1) Arithmetic Operators
+2) Relational Operators
+3) Boolean Operators
+4) String Operators
+5) File Test Operators
+
+--------------------------------------------------------
+Shell loops --
+
+1) The while loop
+2) The for loop
+3) The until loop
+4) Nested loops
+5) Loop control
+
+--------------------------------------------------------
+Shell functions --
+
+1) Creating functions
+2) Passing parameters to functions
+3) Returning values from functions
+4) Nested functions
+5) Function call from prompt
+
+
