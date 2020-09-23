@@ -3541,30 +3541,78 @@ ip
 ip addr show
 
 
+xargs - Take output of a command and passes it as argument of another command. If no command is specified, xargs executes echo by default. 
+You many also instruct it to read data from a file instead of stdin.
+
+1) Convert muti-line output from ls command into single line using xargs as follows. 
+
+[929354@lab-netbox netbox]$ ls -1
+api
+auth
+compress_logs.log
+compress_logs.sh
+view
+
+[929354@lab-netbox netbox]$ ls -1 | xargs
+api auth compress_logs.log compress_logs.sh view
+
+2) To know the number of lines/words/characters in each file in the list, you can use ls command and xargs for this purpose as follows.
+
+[929354@lab-netbox view]$ wc view
+ 1  8 49 view
+
+[929354@lab-netbox view]$ wc view view.2020-09-22
+  1   8  49 view
+  6  56 376 view.2020-09-22
+  7  64 425 total
+
+[929354@lab-netbox view]$ ls -1 | xargs wc
+   1    8   49 view
+   2    3   88 view.2020-09-08.gz
+   2    3  107 view.2020-09-09.gz
+   2    2   83 view.2020-09-10.gz
+   1    6  164 view.2020-09-11.gz
+   2    3  102 view.2020-09-14.gz
+   0    2   82 view.2020-09-15.gz
+   2    3  144 view.2020-09-16.gz
+   0    2  137 view.2020-09-18.gz
+   1   10   77 view.2020-09-21
+   6   56  376 view.2020-09-22
+  19   98 1409 total
 
 
+-------------------------------------------------------------------------
+Rename – A Command Line Tool For Renaming Multiple Files in Linux--
 
+We often use “mv” command to rename a single file in Linux.
+The rename command is used to rename multiple or group of files, rename files to lowercase, rename files to uppercase and overwrite files using perl expressions.
 
+rename [ -v ] [ -n ] [ -f ] perlexpr [ files ]
 
+-v: Print names of files successfully renamed.
+-n: Show what files would have been renamed.
+-f: Force overwrite existing files.
+perlexpr: Perl Expression.
 
+1) Change the extension of all files from “.html” to “.php“. 
 
+$ rename 's/\.html$/\.php/' *.html
  
  
+2) Convert all *.html filenames from Lower to upper case 
+
+$ rename 'y/a-z/A-Z/' *.html
  
- 
- 
- 
- 
- 
+3) Convert all *.HTML filenames from upper to lower case 
+
+$ rename 'y/A-Z/a-z/' *.HTML
+
+3) Capitalize only first letter of each filename
+
+$ rename 's/\b(\w)/\U$1/g' *.ext
 
 
-
-
-
-
-
-
-
+-------------------------------------------------------------------------
 
 
 
