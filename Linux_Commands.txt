@@ -3582,7 +3582,7 @@ api auth compress_logs.log compress_logs.sh view
 
 
 -------------------------------------------------------------------------
-Rename – A Command Line Tool For Renaming Multiple Files in Linux--
+Rename – Renaming Multiple Files in Linux--
 
 We often use “mv” command to rename a single file in Linux.
 The rename command is used to rename multiple or group of files, rename files to lowercase, rename files to uppercase and overwrite files using perl expressions.
@@ -3598,7 +3598,6 @@ perlexpr: Perl Expression.
 
 $ rename 's/\.html$/\.php/' *.html
  
- 
 2) Convert all *.html filenames from Lower to upper case 
 
 $ rename 'y/a-z/A-Z/' *.html
@@ -3607,7 +3606,7 @@ $ rename 'y/a-z/A-Z/' *.html
 
 $ rename 'y/A-Z/a-z/' *.HTML
 
-3) Capitalize only first letter of each filename
+4) Capitalize only first letter of each filename
 
 $ rename 's/\b(\w)/\U$1/g' *.ext
 
